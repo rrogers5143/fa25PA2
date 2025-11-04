@@ -98,7 +98,7 @@ int buildEncodingTree(int nextFree) {
     }
 
     // 3. While the heap size is greater than 1:
-    while (heap.size() > 1) {
+    while (heap.size > 1) {
         // Pop two smallest nodes
         int left = heap.pop(weightArr);
         int right = heap.pop(weightArr);
@@ -129,8 +129,9 @@ void generateCodes(int root, string codes[]) {
 
     if (root == -1) return;
 
-    stack<pair<int, string>> s;
-    s.push({root, ""});
+    stack<pair<int, string> > s;
+    //s.push({root, ""});
+    s.push(std::make_pair(root, ""));
 
     while (!s.empty()) {
         pair<int, string> current = s.top();
@@ -146,10 +147,12 @@ void generateCodes(int root, string codes[]) {
         } else {
             // Push right child first, so left is processed first
             if (rightArr[nodeIndex] != -1) {
-                s.push({rightArr[nodeIndex], code + "1"});
+                //s.push({rightArr[nodeIndex], code + "1"});
+                s.push(std::make_pair(rightArr[nodeIndex], code + "1"));
             }
             if (leftArr[nodeIndex] != -1) {
-                s.push({leftArr[nodeIndex], code + "0"});
+                //s.push({leftArr[nodeIndex], code + "0"});
+                s.push(pair<int, string>(leftArr[nodeIndex], code + "0"));
             }
         }
     }
